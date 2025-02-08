@@ -1,12 +1,12 @@
 @import url('https://static.zeoseven.com/zsft/442/main/result.css'); /* maple font */
 @font-face {
     font-family: 'torus';
-    src: url('/static/Torus-SemiBold.otf') format('opentype');
+    src: url('/static/JetBrainsMono-SemiBold.woff2') format('woff2');
     font-weight: bold;
 }
 @font-face {
     font-family: 'torus';
-    src: url('/static/Torus-Regular.otf') format('opentype');
+    src: url('/static/JetBrainsMono-Regular.woff2') format('woff2');
     font-weight: normal;
 }
 @font-face {
