@@ -1,0 +1,15 @@
+            <div class="chall" id="{{ challid }}" style="display: flex; flex-direction: column; auto-grow: 1;">
+            <div class="title-bar">{{ chall.title }}</div>
+            <button class="xpopup" onclick="popup.close()">&times;</button>
+            <div class="description">{{ chall.desc }}</div>
+            {% if chall.attachment %}
+            <div style="display: flex; padding: 0 20px;">
+                <a href="/attachments?file={{ chall.attachment }}" target="_blank" class="download">下载附件&#129109;</a>
+            </div>
+            {% endif %}
+            <div style="display: flex; margin: 10px 20px 20px 20px;">
+                <input type="text" id="flag" placeholder="NEWYEAR{...}">
+                <span id="check">?</span>
+                <input type="button" value="提交" class="challenge" id="submit" onclick="submitFlag()">
+            </div>
+        </div>

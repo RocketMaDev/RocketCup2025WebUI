@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>2025 新年火箭杯</title>
+</head>
+<body>
+    <div class="top-bar">
+        Rocket Cup 2025
+    </div>
+    <div class="copyright">
+        flag字符串NEWYEAR{...}取出大括号中间的内容就是支付宝口令红包的口令哦
+    </div>
+    <div class="button-container">
+        {% for item in table %}
+        {% if item.remaining != 0 %}
+        <button class="challenge" onclick="invokeDialog({{ loop.index - 1 }})">
+        {% else %}
+        <button class="challenge runout" onclick="invokeDialog({{ loop.index - 1 }})">
+        {% endif %}
+            <div style="display: flex; width: 100%;">
+                <span class="category">{{ item.category }}</span>
+                <span class="amount">¥{{ item.amount }}</span>
+            </div>
+            <span class="title">{{ item.title }}</span>
+            {% if item.remaining != 0 %}
+            <span class="progress">
+            {% else %}
+            <span class="progress" style="color: #FB8383 !important;">
+            {% endif %}
+                [{{ item.remaining }}/{{ item.total }}]
+            </span>
+        </button>
+        {% endfor %}
+    </div>
+    <div class="copyright">&copy;Copyright 2025 RocketDev.</div>
+    <dialog id="popup">
+    </dialog>
+</body>
+<script>
+    const popup = document.querySelector("#popup");
+    var flag = document.querySelector("#flag");
+    function invokeDialog(id) {
+        var req = new XMLHttpRequest();
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 200) {
+                popup.innerHTML = req.responseText;
+                flag = document.querySelector("#flag");
+                flag.addEventListener('keydown', (event) => {
+                    if (flag.value && event.keyCode === 13) {
+                        document.getElementById('submit').click();
+                    }
+                });
+                popup.showModal();
+            }
+        };
+        req.open('GET', '/fill?id=' + id, true);
+        req.send(null);
+    }
+    popup.addEventListener('click', (event) => {
+        if (event.target === popup) {
+            popup.close();
+        }
+    });
+    function submitFlag() {
+        var id = document.getElementsByClassName('chall')[0].id;
+        var req = new XMLHttpRequest();
+        var toverify = document.getElementById('flag').value;
+        var check = document.getElementById('check');
+        req.onreadystatechange = () => {
+            if (req.readyState == 4 && req.status == 200) {
+                if (req.responseText == 'True') {
+                    check.innerText = '✓';
+                    check.style.color = '#80FD5D';
+                } else {
+                    check.innerText = '✗';
+                    check.style.color = '#AF1111';
+                }
+            }
+        };
+        check.innerText = '?';
+        check.style.color = '#E8D454';
+        req.open('GET', `/verify?id=${id}&flag=${toverify}`, true);
+        req.send(null);
+    }
+    // fetch('/test?h='+window.screen.height+'&w='+window.screen.width);
+</script>
+</html>
+

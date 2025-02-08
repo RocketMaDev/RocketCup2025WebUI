@@ -1,0 +1,47 @@
+[
+    {
+        "total": 30,
+        "category": "MISC",
+        "title": "你的第一个红包！",
+        "desc": "NWERFnen0es4yEYA{3cEcd1Es}",
+        "att": null,
+        "amount": 40,
+        "flag": "NEWYEAR{F3nceEnc0de1sE4sy}"
+    },
+    {
+        "total": 20,
+        "category": "MISC",
+        "title": "find $(pwd)",
+        "desc": "下载图片，看看我是从哪里拍的？\nflag提交格式：NEWYEAR{str(sha256(f\"{经度:.2f},{纬度:.2f}\"))[:18]}",
+        "att": "img.jpg",
+        "amount": 45,
+        "flag": "NEWYEAR{2b699aff46606103b4}"
+    },
+    {
+        "total": 12,
+        "category": "MISC",
+        "title": "unpacker",
+        "desc": "真有这么多数据格式？\n找出1234分别对应的格式，从其中文维基百科页面提取url的最后一个字段，并用空格拼接起来，sha256后得到flag。\n例如：1234分别对应w x y z，w的维基url是https://zh.wikipedia.org/wiki/W，那么取W。w x y z最后得到W X Y Z，使用sha256(['W', 'X', 'Y', 'Z'].join(' '))[:18]包上NEWYEAR{}后得到flag。",
+        "att": "packs.tar.bz2",
+        "amount": 55,
+        "flag": "NEWYEAR{459794aa79b251ddd8}"
+    },
+    {
+        "total": 8,
+        "category": "REVERSE",
+        "title": "crackZsh",
+        "desc": "去年是bash脚本逆向，今年zsh脚本卷土重来！",
+        "att": "crackme.zsh.zst",
+        "amount": 60,
+        "flag": "NEWYEAR{2sh3ll_96c09615dac}"
+    },
+    {
+        "total": 5,
+        "category": "PWN",
+        "title": "put?env!",
+        "desc": "Flag放在环境变量里，但是要被覆写了😨\n沙箱中除了read和write以外的系统调用，都只是为了让程序不似，不是用来利用的\nlibc是2.35-0ubuntu3.8_amd64",
+        "att": "putenv",
+        "amount": 100,
+        "flag": "NEWYEAR{环境变量1s4lways非预期}"
+    }
+]
