@@ -17,6 +17,7 @@ class challenge:
         self.amount = amount
 
 app = Flask(__name__)
+
 remains = None
 try:
     with open('status.txt', 'r') as status:
@@ -62,7 +63,7 @@ def updateRemaining():
         challenges[challid].remaining = remainder
         remains[challid] = remainder
         with open('status.txt', 'w') as status:
-            status.write(str(remains)[1:-1])
+            status.write(str(remains)[1:-1]) # strip [  ]
         return 'OK', 200
     except ValueError:
         return 'Can not decode id', 400
@@ -76,9 +77,10 @@ def download():
     file = request.args.get('file')
     if file is None:
         return 'No file presented', 400
-    if '/' in file:
+    if '/' in file: # restrict path
         return 'Corrupted file', 403
     file = 'assets/' + file
+    # note send a directory will raise an error
     if not os.path.exists(file) or os.path.isdir(file):
         return 'File not found', 404
     return send_file(file)
@@ -103,6 +105,6 @@ def verify():
 def favicon():
     return send_file('static/icon.svg')
 
+# this will not run when using gnunicorn as the server
 if __name__ == '__main__':
     app.run('0.0.0.0', 8080, debug=True)
-
